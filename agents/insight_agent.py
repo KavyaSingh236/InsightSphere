@@ -1,13 +1,15 @@
 from .base_agent import BaseAgent
+import os
 from groq import Groq
-from config import GROQ_API_KEY
+
+
 
 class InsightAgent(BaseAgent):
     """Generates all narrative insights using Groq AI, including visual explanations."""
 
     def __init__(self):
         super().__init__("InsightAgent")
-        self.client = Groq(api_key=GROQ_API_KEY)
+        self.client =Groq(api_key=os.getenv("GROQ_API_KEY"))
 
     def ask_ai(self, prompt):
         try:
