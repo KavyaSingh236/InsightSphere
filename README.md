@@ -1,4 +1,4 @@
-# 🤖 InsightSphere - Let your dataset tell its story.
+# 🤖 InsightSphere - Let your dataset tell its story ✨
 
 InsightSphere is an intelligent data diagnostics platform that transforms raw datasets into
 clear narratives, visual intelligence, and executive-ready insights — automatically.
