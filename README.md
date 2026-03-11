@@ -1,77 +1,98 @@
 # 🤖 InsightSphere - Let your dataset tell its story ✨
-
-InsightSphere is an intelligent data diagnostics platform that transforms raw datasets into
-clear narratives, visual intelligence, and executive-ready insights — automatically.
-
-Built as a multi-agent AI system, InsightSphere removes the friction between data and decision-making.
-Users simply upload a dataset, and the system autonomously interprets structure, patterns, performance,
-and implications — delivering a polished analytical report without manual configuration.
+### Automated Data Intelligence Platform
 
 ---
-## 🌐 Live Experience  
+
+## Overview
+
+InsightSphere is an automated data analysis platform that transforms raw datasets into structured insights, visualizations, and predictive model evaluations.
+
+Users upload a dataset and the system automatically performs data cleaning, exploratory analysis, model training, and insight generation before producing a structured analytics report.
+
+The platform is designed to reduce the manual effort required in traditional data analysis workflows while making insights accessible to both technical and non-technical users.
+
+---
+
+## Live Application
+
 https://kavyasingh-insightsphere.streamlit.app/
 
 ---
 
-## ✨ Why InsightSphere Exists
+## Motivation
 
-Modern organizations sit on vast amounts of data, but extracting meaning still requires
-technical expertise, time, and repeated effort.
+Organizations often collect large volumes of data but struggle to extract insights quickly.
 
-InsightSphere addresses this gap by acting as an **autonomous analytical layer** —
-bridging raw data and human understanding.
-
-It is designed for:
-- Decision-makers who need clarity, not code
-- Analysts who want faster insight cycles
-- Teams that value explainability over black-box outputs
+Traditional data analysis requires multiple steps including data preparation, modeling, visualization, and reporting. InsightSphere automates these stages, providing an intelligent analytical workflow that converts raw datasets into meaningful explanations and reports.
 
 ---
 
-## 🧠 Agent-Based Architecture
+## System Architecture
 
-InsightSphere operates using a coordinated multi-agent system. Each agent is responsible for a distinct stage of the analytical lifecycle.
+InsightSphere is built as a multi-agent analytical system where each component performs a specific analytical task.
 
-| Agent Name        | Responsibility |
-|------------------|----------------|
-| **DataAgent**     | Cleans, structures, and prepares the dataset for analysis |
-| **TargetAgent**   | Uses AI reasoning to infer the most suitable target variable |
-| **FeatureAgent**  | Examines feature relationships and correlations |
-| **ModelAgent**    | Trains and compares multiple predictive models |
-| **EvaluationAgent** | Evaluates model performance using standard metrics |
-| **InsightAgent**  | Generates human-readable, data-driven explanations |
-| **ReportAgent**   | Compiles insights, visuals, and narratives into a premium PDF |
+| Agent | Responsibility |
+|------|----------------|
+| DataAgent | Cleans and prepares the dataset |
+| TargetAgent | Infers possible prediction targets |
+| FeatureAgent | Analyzes feature relationships |
+| ModelAgent | Trains and compares predictive models |
+| EvaluationAgent | Evaluates model performance |
+| InsightAgent | Generates natural language explanations |
+| ReportAgent | Produces a structured analytical report |
 
-The system adapts dynamically to each dataset — no predefined rules, no fixed schemas.
-
----
-
-## 📊 What InsightSphere Delivers
-
-- Autonomous target discovery  
-- Comparative model intelligence  
-- Visual diagnostics with context  
-- Plain-language explanations  
-- Actionable business recommendations  
-- A structured, presentation-ready PDF report  
+This modular architecture allows the system to dynamically adapt to different datasets.
 
 ---
 
-## 📄 Insight Report Experience
+## Key Capabilities
 
-Each generated report follows a clear, executive-friendly structure:
-
-- **Executive Summary**  
-- **Dataset Overview**  
-- **Model Comparison & Performance**  
-- **Visual Insights with Explanations**  
-- **Business Recommendations**
-
-Each visual element is accompanied by a concise explanation describing
-*what is happening* and *why it matters*.
+- Automated dataset inspection
+- Intelligent target variable detection
+- Machine learning model comparison
+- Visual exploratory diagnostics
+- Natural language explanation of insights
+- Automated generation of analytical reports
 
 ---
 
-## ✍️ Attribution
+## Analytical Report Output
+
+Each generated report includes:
+
+- Executive Summary
+- Dataset Overview
+- Model Performance Comparison
+- Visual Insights
+- Feature Relationship Analysis
+- Business Recommendations
+
+The report is designed to communicate insights clearly to both technical and business stakeholders.
+
+---
+
+## Technical Stack
+
+- Python
+- Streamlit
+- Pandas
+- NumPy
+- scikit-learn
+- Matplotlib / Seaborn
+- ReportLab (PDF generation)
+
+---
+
+## Skills Demonstrated
+
+- Automated data analysis systems
+- Machine learning model evaluation
+- Data pipeline automation
+- AI-driven insight generation
+- Analytical report generation
+
+---
+
+## Author
 
 Designed & Automated by **Kavya Balaji Singh**
