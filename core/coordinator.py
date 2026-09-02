@@ -11,14 +11,14 @@ class PipelineCoordinator:
 
     def __init__(self):
         self.pipeline = [
-            DataAgent(),
-            TargetAgent(),
-            FeatureAgent(),
-            ModelAgent(),
-            EvaluationAgent(),
-            InsightAgent(),
-            ReportAgent(),
-        ]
+    DataAgent(),
+    TargetAgent(),
+    FeatureAgent(),
+    ModelAgent(),
+    EvaluationAgent(),
+    InsightAgent(),
+    ReportAgent(),
+]
 
     def run(self, df):
         context = {"data": df}
