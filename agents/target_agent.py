@@ -33,7 +33,7 @@ class TargetAgent(BaseAgent):
         return answer.replace('"', "").replace("'", "").strip()
 
     def run(self, context):
-        df = context["clean_data"]
+        df = context["data"]
         self.log("🤖 AI inferring target column...")
 
         target_col = None
