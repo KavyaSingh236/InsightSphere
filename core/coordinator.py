@@ -11,8 +11,8 @@ class PipelineCoordinator:
 
     def __init__(self):
         self.pipeline = [
-    DataAgent(),
     TargetAgent(),
+    DataAgent(),
     FeatureAgent(),
     ModelAgent(),
     EvaluationAgent(),
