@@ -20,8 +20,16 @@ class EvaluationAgent(BaseAgent):
         super().__init__("EvaluationAgent")
 
     def run(self, context):
+
+        # --------------------------------------------------
+        # Skip if no models were trained
+        # --------------------------------------------------
+
         if context.get("model_scores") is None:
-            self.log("⚠ Skipping evaluation — no trained models (single-class target).")
+            self.log(
+                "⚠ Skipping evaluation — no trained models "
+                "(single-class target)."
+            )
             return context
 
         os.makedirs("outputs", exist_ok=True)
@@ -30,25 +38,62 @@ class EvaluationAgent(BaseAgent):
         X_test = context["X_test"]
         y_test = context["y_test"]
 
-        # 1. Target distribution
-        plt.figure(figsize=(4, 3), dpi=200)
-        sns.countplot(x=y_test)
-        plt.title("Target Distribution")
+        # Save target distribution data for InsightAgent
+        context["target_info"] = (
+            y_test.value_counts().to_dict()
+        )
+
+        # ==================================================
+        # 1. TARGET DISTRIBUTION
+        # ==================================================
+
+        plt.figure(
+            figsize=(4, 3),
+            dpi=200
+        )
+
+        sns.countplot(
+            x=y_test
+        )
+
+        plt.title(
+            "Target Distribution"
+        )
+
         plt.tight_layout()
 
-        target_path = "outputs/target_distribution.png"
-        plt.savefig(target_path)
+        target_path = (
+            "outputs/target_distribution.png"
+        )
+
+        plt.savefig(
+            target_path
+        )
+
         plt.close()
 
-        # 2. Confusion matrix
-        preds = best_model.predict(X_test)
+        # ==================================================
+        # 2. CONFUSION MATRIX
+        # ==================================================
+
+        preds = best_model.predict(
+            X_test
+        )
 
         cm = confusion_matrix(
             y_test,
             preds
         )
 
-        plt.figure(figsize=(4, 3), dpi=200)
+        # Save confusion matrix values for InsightAgent
+        context["conf_matrix_info"] = (
+            cm.tolist()
+        )
+
+        plt.figure(
+            figsize=(4, 3),
+            dpi=200
+        )
 
         sns.heatmap(
             cm,
@@ -57,16 +102,34 @@ class EvaluationAgent(BaseAgent):
             cmap="Blues"
         )
 
-        plt.title("Confusion Matrix")
-        plt.ylabel("True Label")
-        plt.xlabel("Predicted Label")
+        plt.title(
+            "Confusion Matrix"
+        )
+
+        plt.ylabel(
+            "True Label"
+        )
+
+        plt.xlabel(
+            "Predicted Label"
+        )
+
         plt.tight_layout()
 
-        cm_path = "outputs/confusion_matrix.png"
-        plt.savefig(cm_path)
+        cm_path = (
+            "outputs/confusion_matrix.png"
+        )
+
+        plt.savefig(
+            cm_path
+        )
+
         plt.close()
 
-        # 3. ROC curve
+        # ==================================================
+        # 3. ROC CURVE
+        # ==================================================
+
         roc_path = None
 
         if (
@@ -74,19 +137,23 @@ class EvaluationAgent(BaseAgent):
             and y_test.nunique() == 2
         ):
 
-            probs = best_model.predict_proba(X_test)[:, 1]
+            probs = best_model.predict_proba(
+                X_test
+            )[:, 1]
 
-            # Convert string labels such as Yes/No into 0/1
-            y_test_roc = y_test.copy()
+            # ----------------------------------------------
+            # Convert labels such as Yes/No into 0/1
+            # ----------------------------------------------
 
-            if not str(y_test.dtype).startswith(
-                ("int", "float")
-            ):
-                encoder = LabelEncoder()
+            encoder = LabelEncoder()
 
-                y_test_roc = encoder.fit_transform(
-                    y_test.astype(str)
-                )
+            y_test_roc = encoder.fit_transform(
+                y_test.astype(str)
+            )
+
+            # ----------------------------------------------
+            # ROC + AUC
+            # ----------------------------------------------
 
             fpr, tpr, _ = roc_curve(
                 y_test_roc,
@@ -98,7 +165,19 @@ class EvaluationAgent(BaseAgent):
                 probs
             )
 
-            plt.figure(figsize=(4, 3), dpi=200)
+            # Save AUC for InsightAgent
+            context["auc_score"] = float(
+                auc
+            )
+
+            # ----------------------------------------------
+            # Plot ROC
+            # ----------------------------------------------
+
+            plt.figure(
+                figsize=(4, 3),
+                dpi=200
+            )
 
             plt.plot(
                 fpr,
@@ -113,19 +192,49 @@ class EvaluationAgent(BaseAgent):
                 color="grey"
             )
 
-            plt.title("ROC Curve")
-            plt.xlabel("False Positive Rate")
-            plt.ylabel("True Positive Rate")
+            plt.title(
+                "ROC Curve"
+            )
+
+            plt.xlabel(
+                "False Positive Rate"
+            )
+
+            plt.ylabel(
+                "True Positive Rate"
+            )
+
             plt.legend()
+
             plt.tight_layout()
 
-            roc_path = "outputs/roc_curve.png"
+            roc_path = (
+                "outputs/roc_curve.png"
+            )
 
-            plt.savefig(roc_path)
+            plt.savefig(
+                roc_path
+            )
+
             plt.close()
 
-        context["target_plot"] = target_path
-        context["conf_matrix"] = cm_path
-        context["roc_curve"] = roc_path
+        else:
+            context["auc_score"] = None
+
+        # ==================================================
+        # SAVE OUTPUT PATHS
+        # ==================================================
+
+        context["target_plot"] = (
+            target_path
+        )
+
+        context["conf_matrix"] = (
+            cm_path
+        )
+
+        context["roc_curve"] = (
+            roc_path
+        )
 
         return context
